@@ -6,3 +6,5 @@ create-lsc:
 	./init-letsencrypt.sh
 up:
 	docker-compose up -d
+dowm:
+	docker-compose down
