@@ -5,4 +5,4 @@ create-lsc:
 	chmod +x init-letsencrypt.sh
 	./init-letsencrypt.sh
 up:
-	docker-compose up
+	docker-compose up -d
