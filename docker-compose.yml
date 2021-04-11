@@ -3,7 +3,11 @@ version: "3.5"
 services:
   nginx:
     container_name: nginx
-    image: nginx:1.15-alpine
+    build:
+      context: ./docker/nginx
+      args:
+        FCT_AUTH_USER: ${FCT_AUTH_USER}
+        FCT_AUTH_PASSWORD: ${FCT_AUTH_PASSWORD}
     ports:
       - 80:80
       - 443:443
@@ -13,6 +17,8 @@ services:
       - ./data/certbot/www:/var/www/certbot
       - ./stub:/var/www/stub
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    env_file:
+      - .env
   certbot:
     container_name: certbot
     image: certbot/certbot
